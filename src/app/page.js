@@ -3,12 +3,7 @@
 
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
-import {
-  FaPlus,
-  FaCalculator,
-  FaFileDownload,
-  FaChartPie,
-} from "react-icons/fa";
+import { FaPlus, FaFileDownload, FaChartPie } from "react-icons/fa";
 import TransactionForm from "../components/TransactionForm";
 import TransactionList from "../components/TransactionList";
 import TaxReport from "../components/TaxReport";

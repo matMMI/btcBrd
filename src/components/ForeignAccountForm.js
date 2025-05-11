@@ -40,11 +40,11 @@ export default function ForeignAccountForm({ onSubmit, onCancel }) {
   return (
     <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
       <h3 className="text-xl font-semibold mb-4">
-        Nouveau compte à l'étranger
+        Nouveau compte à l&apos;étranger
       </h3>
       <p className="text-sm text-gray-600 mb-4">
         Pour le formulaire 3916-BIS (déclaration des comptes crypto à
-        l'étranger)
+        l&apos;étranger)
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

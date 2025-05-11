@@ -63,8 +63,6 @@ export default function Home() {
     <div className="max-w-6xl mx-auto">
       <div className="mb-8">
         <h2 className="text-3xl font-bold mb-4">Tableau de bord Crypto</h2>
-
-        {/* Tabs */}
         <div className="border-b border-gray-200 mb-6">
           <nav className="-mb-px flex space-x-8">
             <button
@@ -95,7 +93,7 @@ export default function Home() {
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
-              Comptes à l'étranger
+              Comptes à l&apos;étranger
             </button>
           </nav>
         </div>
@@ -142,7 +140,7 @@ export default function Home() {
                 onClick={() => setShowAccountForm(true)}
                 className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center gap-2"
               >
-                <FaPlus /> Ajouter un compte à l'étranger
+                <FaPlus /> Ajouter un compte à l&apos;étranger
               </button>
             </div>
 
@@ -160,7 +158,7 @@ export default function Home() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold mb-4">
-                Comptes crypto à l'étranger
+                Comptes crypto à l&apos;étranger
               </h3>
               {foreignAccounts.length === 0 ? (
                 <p className="text-gray-500">Aucun compte enregistré</p>

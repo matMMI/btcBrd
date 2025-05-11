@@ -109,16 +109,16 @@ Document généré le ${new Date().toLocaleString("fr-FR")}
           </h4>
           <ul className="text-sm space-y-2">
             <li>
-              • <strong>Seuil d'exonération:</strong> Les plus-values de moins
-              de 305 EUR sont exonérées d'impôt
+              • <strong>Seuil d&apos;exonération:</strong> Les plus-values de
+              moins de 305 EUR sont exonérées d&apos;impôt
             </li>
             <li>
-              • <strong>Taux d'imposition:</strong> 30% (12,8% IR + 17,2%
+              • <strong>Taux d&apos;imposition:</strong> 30% (12,8% IR + 17,2%
               prélèvements sociaux)
             </li>
             <li>
               • <strong>Formulaire 2086:</strong> À remplir pour les plus-values
-              de cession d'actifs numériques
+              de cession d&apos;actifs numériques
             </li>
             <li>
               • <strong>Formulaire 2042 C:</strong> Report de la plus-value

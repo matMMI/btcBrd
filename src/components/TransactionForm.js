@@ -135,7 +135,7 @@ export default function TransactionForm({ onSubmit, onCancel }) {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Plateforme d'échange
+            Plateforme d&apos;échange
           </label>
           <input
             type="text"

@@ -1,28 +1,23 @@
 "use client";
-
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { FaLock } from "react-icons/fa";
 import { supabase } from "../lib/supabase";
-
 export default function AdminModal({ isOpen, onClose, onLogin }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
-
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: "mathis.togni@sfr.fr", // Email fixe
         password,
       });
-
       if (error) {
         setError("Mot de passe incorrect");
       } else {
@@ -36,13 +31,11 @@ export default function AdminModal({ isOpen, onClose, onLogin }) {
       setLoading(false);
     }
   };
-
   const handleClose = () => {
     setPassword("");
     setError("");
     onClose();
   };
-
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md">
@@ -67,12 +60,15 @@ export default function AdminModal({ isOpen, onClose, onLogin }) {
                 autoFocus
               />
             </div>
-            {error && (
-              <p className="text-sm text-destructive">{error}</p>
-            )}
+            {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
           <div className="flex gap-2">
-            <Button type="button" variant="outline" onClick={handleClose} className="flex-1">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleClose}
+              className="flex-1"
+            >
               Annuler
             </Button>
             <Button type="submit" className="flex-1" disabled={loading}>

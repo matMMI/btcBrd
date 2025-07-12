@@ -1,17 +1,13 @@
-// src/app/page.js
 "use client";
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
-import { FaPlus, FaChartPie, FaBitcoin, FaSignOutAlt } from "react-icons/fa";
-import TransactionForm from "../components/TransactionForm";
+import { FaPlus, FaBitcoin, FaSignOutAlt } from "react-icons/fa";
 import TransactionList from "../components/TransactionList";
-import TaxReport from "../components/TaxReport";
 import ForeignAccountForm from "../components/ForeignAccountForm";
 import AdminModal from "../components/AdminModal";
 import PublicDashboard from "../components/PublicDashboard";
 import TransactionModal from "../components/TransactionModal";
 import DashboardCards from "../components/DashboardCards";
-import { calculateTax } from "../utils/taxCalculator";
 import { toast } from "react-toastify";
 import {
   Card,
@@ -28,7 +24,6 @@ export default function Home() {
   const [foreignAccounts, setForeignAccounts] = useState([]);
   const [showTransactionModal, setShowTransactionModal] = useState(false);
   const [showAccountForm, setShowAccountForm] = useState(false);
-  const [taxData, setTaxData] = useState(null);
   const [activeTab, setActiveTab] = useState("dashboard");
   const [bitcoinPrice, setBitcoinPrice] = useState(null);
   const [totalInvested, setTotalInvested] = useState(0);
@@ -38,15 +33,11 @@ export default function Home() {
     fetchTransactions();
     fetchForeignAccounts();
     fetchBitcoinPrice();
-    // Mise à jour du prix Bitcoin toutes les 30 secondes
     const interval = setInterval(fetchBitcoinPrice, 30000);
     return () => clearInterval(interval);
   }, []);
   useEffect(() => {
     if (transactions.length > 0) {
-      const calculated = calculateTax(transactions);
-      setTaxData(calculated);
-      // Calculer l'investissement total et le nombre de Bitcoin
       const buyTransactions = transactions.filter((t) => t.type === "buy");
       const totalInvestedAmount = buyTransactions.reduce(
         (sum, t) => sum + parseFloat(t.fiat_amount),
@@ -108,7 +99,6 @@ export default function Home() {
     await supabase.auth.signOut();
     setUser(null);
   };
-  // Affichage public par défaut
   if (!user) {
     return (
       <>
@@ -164,7 +154,6 @@ export default function Home() {
             </button>
           </nav>
         </div>
-        {/* Tab Content */}
         {activeTab === "dashboard" && (
           <div>
             <DashboardCards
@@ -173,7 +162,7 @@ export default function Home() {
               totalBitcoin={totalBitcoin}
               currentValue={currentValue}
             />
-            {/* Section de gestion des transactions */}
+            
             <div className="flex justify-between items-center mb-6">
               <Button
                 onClick={() => setShowTransactionModal(true)}

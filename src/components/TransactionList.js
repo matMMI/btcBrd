@@ -5,110 +5,88 @@ import { FaTrash, FaEdit } from "react-icons/fa";
 import { supabase } from "../lib/supabase";
 import { toast } from "react-toastify";
 import { format } from "date-fns";
+import { useState } from "react";
+import DeleteModal from "./DeleteModal";
 
 export default function TransactionList({ transactions, onUpdate }) {
-  const handleDelete = async (id) => {
-    if (
-      window.confirm("Êtes-vous sûr de vouloir supprimer cette transaction ?")
-    ) {
-      const { error } = await supabase
-        .from("crypto_transactions")
-        .delete()
-        .eq("id", id);
+  const [deleteModal, setDeleteModal] = useState({ isOpen: false, transactionId: null });
 
-      if (error) {
-        toast.error("Erreur lors de la suppression");
-        console.error("Error:", error);
-      } else {
-        toast.success("Transaction supprimée");
-        onUpdate();
-      }
+  const handleDeleteClick = (id) => {
+    setDeleteModal({ isOpen: true, transactionId: id });
+  };
+
+  const handleDeleteConfirm = async () => {
+    const { error } = await supabase
+      .from("crypto_transactions")
+      .delete()
+      .eq("id", deleteModal.transactionId);
+
+    if (error) {
+      toast.error("Erreur lors de la suppression");
+      console.error("Error:", error);
+    } else {
+      toast.success("Transaction supprimée");
+      onUpdate();
     }
   };
 
   if (transactions.length === 0) {
     return (
-      <div className="bg-white p-6 rounded-lg shadow-md text-center text-gray-500">
+      <div className="bg-dark-card p-6 rounded-lg border border-dark-border text-center text-dark-muted">
         Aucune transaction enregistrée
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-dark-card rounded-lg border border-dark-border overflow-hidden">
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+        <table className="min-w-full divide-y divide-dark-border">
+          <thead className="bg-dark-bg">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-dark-muted uppercase tracking-wider">
                 Date
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Type
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-dark-muted uppercase tracking-wider">
                 Crypto
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-dark-muted uppercase tracking-wider">
                 Quantité
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Prix unitaire
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-dark-muted uppercase tracking-wider">
                 Total (EUR)
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-dark-muted uppercase tracking-wider">
                 Plateforme
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-dark-muted uppercase tracking-wider">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-dark-card divide-y divide-dark-border">
             {transactions.map((transaction) => (
               <tr key={transaction.id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-dark-text">
                   {format(new Date(transaction.date), "dd/MM/yyyy")}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      transaction.type === "buy"
-                        ? "bg-green-100 text-green-800"
-                        : transaction.type === "sell"
-                        ? "bg-red-100 text-red-800"
-                        : "bg-blue-100 text-blue-800"
-                    }`}
-                  >
-                    {transaction.type === "buy"
-                      ? "Achat"
-                      : transaction.type === "sell"
-                      ? "Vente"
-                      : "Échange"}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-dark-text">
                   {transaction.crypto_symbol}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-dark-text">
                   {transaction.crypto_amount.toFixed(8)}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  €{transaction.price_per_unit.toFixed(2)}
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-dark-text font-medium">
+                  €{transaction.fiat_amount ? transaction.fiat_amount.toFixed(2) : 'Gratuit'}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
-                  €{transaction.fiat_amount.toFixed(2)}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-dark-text">
                   {transaction.exchange_platform || "-"}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-dark-muted">
                   <div className="flex space-x-2">
                     <button
-                      onClick={() => handleDelete(transaction.id)}
-                      className="text-red-600 hover:text-red-900"
+                      onClick={() => handleDeleteClick(transaction.id)}
+                      className="text-danger hover:text-red-400"
                     >
                       <FaTrash />
                     </button>
@@ -119,6 +97,14 @@ export default function TransactionList({ transactions, onUpdate }) {
           </tbody>
         </table>
       </div>
+
+      <DeleteModal
+        isOpen={deleteModal.isOpen}
+        onClose={() => setDeleteModal({ isOpen: false, transactionId: null })}
+        onConfirm={handleDeleteConfirm}
+        title="Supprimer la transaction"
+        description="Êtes-vous sûr de vouloir supprimer cette transaction ? Cette action est irréversible."
+      />
     </div>
   );
 }

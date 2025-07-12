@@ -38,18 +38,18 @@ export default function ForeignAccountForm({ onSubmit, onCancel }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
-      <h3 className="text-xl font-semibold mb-4">
+    <form onSubmit={handleSubmit} className="bg-dark-card p-6 rounded-lg border border-dark-border">
+      <h3 className="text-xl font-semibold mb-4 text-dark-text">
         Nouveau compte à l&apos;étranger
       </h3>
-      <p className="text-sm text-gray-600 mb-4">
+      <p className="text-sm text-dark-muted mb-4">
         Pour le formulaire 3916-BIS (déclaration des comptes crypto à
         l&apos;étranger)
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-dark-text mb-1">
             Nom de la plateforme
           </label>
           <input
@@ -59,12 +59,12 @@ export default function ForeignAccountForm({ onSubmit, onCancel }) {
             onChange={handleChange}
             placeholder="Ex: Binance, Kraken, Coinbase..."
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text placeholder-dark-muted"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-dark-text mb-1">
             Pays de la plateforme
           </label>
           <input
@@ -74,12 +74,12 @@ export default function ForeignAccountForm({ onSubmit, onCancel }) {
             onChange={handleChange}
             placeholder="Ex: Malte, États-Unis, Suisse..."
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text placeholder-dark-muted"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-dark-text mb-1">
             Type de compte
           </label>
           <input
@@ -88,7 +88,7 @@ export default function ForeignAccountForm({ onSubmit, onCancel }) {
             value={account.account_type}
             onChange={handleChange}
             placeholder="Ex: Exchange, Wallet..."
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text placeholder-dark-muted"
           />
         </div>
 
@@ -101,7 +101,7 @@ export default function ForeignAccountForm({ onSubmit, onCancel }) {
               onChange={handleChange}
               className="rounded border-gray-300 text-primary focus:ring-primary"
             />
-            <span className="ml-2 text-sm text-gray-700">Compte actif</span>
+            <span className="ml-2 text-sm text-dark-text">Compte actif</span>
           </label>
         </div>
       </div>
@@ -116,7 +116,7 @@ export default function ForeignAccountForm({ onSubmit, onCancel }) {
         <button
           type="button"
           onClick={onCancel}
-          className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400"
+          className="bg-dark-border text-dark-text px-4 py-2 rounded-md hover:bg-dark-muted hover:bg-opacity-20"
         >
           Annuler
         </button>

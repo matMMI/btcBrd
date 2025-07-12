@@ -59,9 +59,9 @@ Document généré le ${new Date().toLocaleString("fr-FR")}
 
   return (
     <div className="space-y-6">
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-dark-card p-6 rounded-lg border border-dark-border">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-xl font-semibold flex items-center gap-2">
+          <h3 className="text-xl font-semibold flex items-center gap-2 text-dark-text">
             <FaCalculator className="text-primary" />
             Résumé fiscal
           </h3>
@@ -74,40 +74,40 @@ Document généré le ${new Date().toLocaleString("fr-FR")}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="bg-blue-50 p-4 rounded-lg">
-            <p className="text-sm text-gray-600">
+          <div className="bg-primary bg-opacity-10 p-4 rounded-lg border border-primary border-opacity-20">
+            <p className="text-sm text-dark-muted">
               Plus-values totales réalisées
             </p>
             <p className="text-2xl font-bold text-primary">
               {formatCurrency(taxData.totalGains)}
             </p>
           </div>
-          <div className="bg-green-50 p-4 rounded-lg">
-            <p className="text-sm text-gray-600">Plus-value imposable</p>
+          <div className="bg-secondary bg-opacity-10 p-4 rounded-lg border border-secondary border-opacity-20">
+            <p className="text-sm text-dark-muted">Plus-value imposable</p>
             <p className="text-2xl font-bold text-secondary">
               {formatCurrency(taxData.taxableAmount)}
             </p>
           </div>
-          <div className="bg-yellow-50 p-4 rounded-lg">
-            <p className="text-sm text-gray-600">Exonération appliquée</p>
-            <p className="text-2xl font-bold text-yellow-700">
+          <div className="bg-yellow-500 bg-opacity-10 p-4 rounded-lg border border-yellow-500 border-opacity-20">
+            <p className="text-sm text-dark-muted">Exonération appliquée</p>
+            <p className="text-2xl font-bold text-yellow-400">
               {formatCurrency(taxData.exemptionApplied)}
             </p>
           </div>
-          <div className="bg-red-50 p-4 rounded-lg">
-            <p className="text-sm text-gray-600">Impôt à payer</p>
+          <div className="bg-danger bg-opacity-10 p-4 rounded-lg border border-danger border-opacity-20">
+            <p className="text-sm text-dark-muted">Impôt à payer</p>
             <p className="text-2xl font-bold text-danger">
               {formatCurrency(taxData.taxToPay)}
             </p>
           </div>
         </div>
 
-        <div className="border-t pt-4">
-          <h4 className="font-semibold mb-3 flex items-center gap-2">
-            <FaInfoCircle className="text-blue-500" />
+        <div className="border-t border-dark-border pt-4">
+          <h4 className="font-semibold mb-3 flex items-center gap-2 text-dark-text">
+            <FaInfoCircle className="text-primary" />
             Informations fiscales
           </h4>
-          <ul className="text-sm space-y-2">
+          <ul className="text-sm space-y-2 text-dark-muted">
             <li>
               • <strong>Seuil d&apos;exonération:</strong> Les plus-values de
               moins de 305 EUR sont exonérées d&apos;impôt
@@ -128,36 +128,36 @@ Document généré le ${new Date().toLocaleString("fr-FR")}
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h3 className="text-xl font-semibold mb-4">Portefeuille actuel</h3>
+      <div className="bg-dark-card p-6 rounded-lg border border-dark-border">
+        <h3 className="text-xl font-semibold mb-4 text-dark-text">Portefeuille actuel</h3>
         {Object.keys(taxData.portfolio || {}).length === 0 ? (
-          <p className="text-gray-500">Aucun crypto-actif en portefeuille</p>
+          <p className="text-dark-muted">Aucun crypto-actif en portefeuille</p>
         ) : (
           <div className="space-y-3">
             {Object.entries(taxData.portfolio || {}).map(([symbol, data]) => (
               <div
                 key={symbol}
-                className="flex justify-between items-center p-3 bg-gray-50 rounded"
+                className="flex justify-between items-center p-3 bg-dark-bg rounded border border-dark-border"
               >
                 <div>
-                  <p className="font-medium">{symbol}</p>
-                  <p className="text-sm text-gray-600">
+                  <p className="font-medium text-dark-text">{symbol}</p>
+                  <p className="text-sm text-dark-muted">
                     {data.amount.toFixed(8)} unités
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="font-medium">
+                  <p className="font-medium text-dark-text">
                     {formatCurrency(data.totalCost)}
                   </p>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-dark-muted">
                     Prix moyen: {formatCurrency(data.totalCost / data.amount)}
                     /unité
                   </p>
                 </div>
               </div>
             ))}
-            <div className="border-t pt-3 text-right">
-              <p className="text-lg font-bold">
+            <div className="border-t border-dark-border pt-3 text-right">
+              <p className="text-lg font-bold text-dark-text">
                 Valeur totale: {formatCurrency(taxData.totalPortfolioValue)}
               </p>
             </div>

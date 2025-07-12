@@ -114,12 +114,7 @@ export default function Home() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-8">
-        <div className="flex justify-between items-center mb-4">
-          <div>
-            <h2 className="text-3xl font-bold text-foreground">
-              Administration
-            </h2>
-          </div>
+        <div className="flex justify-end items-center mb-4">
           <Button
             variant="outline"
             onClick={handleLogout}

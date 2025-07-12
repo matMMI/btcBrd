@@ -23,7 +23,7 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
         type: transaction.type,
         crypto_symbol: transaction.crypto_symbol,
         crypto_amount: transaction.crypto_amount.toString(),
-        price_per_unit: transaction.price_per_unit ? transaction.price_per_unit.toString() : "",
+        price_per_unit: transaction.fiat_amount ? transaction.fiat_amount.toString() : "",
         exchange_platform: transaction.exchange_platform || "",
         notes: transaction.notes || "",
       });
@@ -138,7 +138,7 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
 
             <div>
               <label className="block text-sm font-medium text-dark-text mb-1">
-                Prix unitaire (EUR)
+                Prix (EUR)
               </label>
               <input
                 type="number"

@@ -107,9 +107,8 @@ export default function TransactionList({
                   </Badge>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-dark-text font-medium">
-                  €
                   {transaction.fiat_amount
-                    ? transaction.fiat_amount.toFixed(2)
+                    ? "€ " + transaction.fiat_amount.toFixed(2)
                     : "Gratuit"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-dark-text">

@@ -122,11 +122,11 @@ export default function PublicDashboard({ onAdminLogin }) {
                       </div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="font-medium flex items-center gap-1">
-                      {parseFloat(transaction.crypto_amount).toFixed(8)}
-                      <Badge variant="gold" className="text-xs px-1 py-0">
-                        <FaBitcoin className="text-xs" />
+                  <div className="text-right space-y-2">
+                    <div className="font-medium">
+                      <Badge variant="gold" className="text-xs px-2 py-1">
+                        <FaBitcoin className="mr-1 text-xs" />
+                        {(parseFloat(transaction.crypto_amount) * 100000000).toFixed(0)} sat
                       </Badge>
                     </div>
                     <div className="text-sm text-muted-foreground">

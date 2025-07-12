@@ -1,18 +1,25 @@
 // src/components/TransactionList.js
 "use client";
 
-import { FaTrash, FaEdit } from "react-icons/fa";
+import { FaTrash, FaEdit, FaBitcoin } from "react-icons/fa";
 import { supabase } from "../lib/supabase";
 import { toast } from "react-toastify";
 import { format } from "date-fns";
 import { useState } from "react";
 import DeleteModal from "./DeleteModal";
+import EditTransactionModal from "./EditTransactionModal";
+import { Badge } from "./ui/badge";
 
 export default function TransactionList({ transactions, onUpdate }) {
   const [deleteModal, setDeleteModal] = useState({ isOpen: false, transactionId: null });
+  const [editModal, setEditModal] = useState({ isOpen: false, transaction: null });
 
   const handleDeleteClick = (id) => {
     setDeleteModal({ isOpen: true, transactionId: id });
+  };
+
+  const handleEditClick = (transaction) => {
+    setEditModal({ isOpen: true, transaction });
   };
 
   const handleDeleteConfirm = async () => {
@@ -51,10 +58,10 @@ export default function TransactionList({ transactions, onUpdate }) {
                 Crypto
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-dark-muted uppercase tracking-wider">
-                Quantité
+                Satoshis
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-dark-muted uppercase tracking-wider">
-                Total (EUR)
+                Prix (EUR)
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-dark-muted uppercase tracking-wider">
                 Plateforme
@@ -74,7 +81,10 @@ export default function TransactionList({ transactions, onUpdate }) {
                   {transaction.crypto_symbol}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-dark-text">
-                  {transaction.crypto_amount.toFixed(8)}
+                  <Badge variant="gold" className="text-xs px-2 py-1">
+                    <FaBitcoin className="mr-1 text-xs" />
+                    {(transaction.crypto_amount * 100000000).toFixed(0)}
+                  </Badge>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-dark-text font-medium">
                   €{transaction.fiat_amount ? transaction.fiat_amount.toFixed(2) : 'Gratuit'}
@@ -84,6 +94,12 @@ export default function TransactionList({ transactions, onUpdate }) {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-dark-muted">
                   <div className="flex space-x-2">
+                    <button
+                      onClick={() => handleEditClick(transaction)}
+                      className="text-blue-500 hover:text-blue-400"
+                    >
+                      <FaEdit />
+                    </button>
                     <button
                       onClick={() => handleDeleteClick(transaction.id)}
                       className="text-danger hover:text-red-400"
@@ -104,6 +120,13 @@ export default function TransactionList({ transactions, onUpdate }) {
         onConfirm={handleDeleteConfirm}
         title="Supprimer la transaction"
         description="Êtes-vous sûr de vouloir supprimer cette transaction ? Cette action est irréversible."
+      />
+
+      <EditTransactionModal
+        isOpen={editModal.isOpen}
+        onClose={() => setEditModal({ isOpen: false, transaction: null })}
+        onSubmit={onUpdate}
+        transaction={editModal.transaction}
       />
     </div>
   );

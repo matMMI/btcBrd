@@ -11,7 +11,7 @@ export default function TransactionModal({ isOpen, onClose, onSubmit }) {
     type: "buy",
     crypto_symbol: "BTC",
     crypto_amount: "",
-    price_per_unit: "",
+    fiat_amount: "",
     exchange_platform: "",
     notes: "",
   });
@@ -27,17 +27,16 @@ export default function TransactionModal({ isOpen, onClose, onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const fiat_amount =
-      parseFloat(transaction.crypto_amount) *
-      parseFloat(transaction.price_per_unit);
-
     const { error } = await supabase.from("crypto_transactions").insert([
       {
-        ...transaction,
+        date: transaction.date,
+        type: transaction.type,
+        crypto_symbol: transaction.crypto_symbol,
         crypto_amount: parseFloat(transaction.crypto_amount),
-        price_per_unit: parseFloat(transaction.price_per_unit),
-        fiat_amount,
+        fiat_amount: parseFloat(transaction.fiat_amount),
         fiat_currency: "EUR",
+        exchange_platform: transaction.exchange_platform,
+        notes: transaction.notes,
       },
     ]);
 
@@ -51,7 +50,7 @@ export default function TransactionModal({ isOpen, onClose, onSubmit }) {
         type: "buy",
         crypto_symbol: "BTC",
         crypto_amount: "",
-        price_per_unit: "",
+        fiat_amount: "",
         exchange_platform: "",
         notes: "",
       });
@@ -95,6 +94,7 @@ export default function TransactionModal({ isOpen, onClose, onSubmit }) {
               >
                 <option value="buy">Achat</option>
                 <option value="sell">Vente</option>
+                <option value="received">Reçu gratuitement</option>
                 <option value="exchange">Échange</option>
               </select>
             </div>
@@ -132,12 +132,12 @@ export default function TransactionModal({ isOpen, onClose, onSubmit }) {
 
             <div>
               <label className="block text-sm font-medium text-dark-text mb-1">
-                Prix unitaire (EUR)
+                Montant total (EUR)
               </label>
               <input
                 type="number"
-                name="price_per_unit"
-                value={transaction.price_per_unit}
+                name="fiat_amount"
+                value={transaction.fiat_amount}
                 onChange={handleChange}
                 placeholder="0.00"
                 step="0.01"

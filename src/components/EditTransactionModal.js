@@ -98,6 +98,7 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
               >
                 <option value="buy">Achat</option>
                 <option value="sell">Vente</option>
+                <option value="received">Reçu gratuitement</option>
                 <option value="exchange">Échange</option>
               </select>
             </div>

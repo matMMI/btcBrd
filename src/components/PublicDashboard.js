@@ -19,19 +19,26 @@ export default function PublicDashboard({ onAdminLogin }) {
   }, []);
   useEffect(() => {
     if (transactions.length > 0) {
-      const buyTransactions = transactions.filter((t) => t.type === "buy");
-      const totalInvestedAmount = buyTransactions.reduce(
-        (sum, t) => sum + parseFloat(t.fiat_amount),
-        0
-      );
-      const totalBitcoinAmount = buyTransactions.reduce(
-        (sum, t) => sum + parseFloat(t.crypto_amount),
-        0
-      );
+      // Montant total investi (seulement les achats payants)
+      const totalInvestedAmount = transactions
+        .filter((t) => t.type === "buy" && parseFloat(t.fiat_amount) > 0)
+        .reduce((sum, t) => sum + parseFloat(t.fiat_amount), 0);
+      
+      // Total des satoshis possédés (achats + reçus - ventes) 
+      const totalBitcoinBalance = transactions.reduce((sum, t) => {
+        const amount = parseFloat(t.crypto_amount);
+        if (t.type === "buy" || t.type === "received") {
+          return sum + amount;
+        } else if (t.type === "sell") {
+          return sum - amount;
+        }
+        return sum; // pour les autres types comme "exchange"
+      }, 0);
+      
       setTotalInvested(totalInvestedAmount);
-      setTotalBitcoin(totalBitcoinAmount);
+      setTotalBitcoin(totalBitcoinBalance);
       if (bitcoinPrice) {
-        setCurrentValue(totalBitcoinAmount * bitcoinPrice);
+        setCurrentValue(totalBitcoinBalance * bitcoinPrice);
       }
     }
   }, [transactions, bitcoinPrice]);

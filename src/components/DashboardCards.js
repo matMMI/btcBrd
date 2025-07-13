@@ -6,6 +6,7 @@ export default function DashboardCards({
   bitcoinPrice,
   totalInvested,
   totalBitcoin,
+  totalReceived,
   currentValue,
 }) {
   return (
@@ -30,14 +31,23 @@ export default function DashboardCards({
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Investi Total</CardTitle>
         </CardHeader>
-        <CardContent className="flex flex-col justify-center items-center flex-1 space-y-4">
+        <CardContent className="flex flex-col justify-center items-center flex-1 ">
           <div className="text-2xl font-regular  text-primary text-center">
             {totalInvested.toLocaleString("fr-FR")} €
           </div>
-          <Badge variant="gold" className="text-xs px-2 py-1">
-            <FaBitcoin className="mr-1 text-xs" />
-            {(totalBitcoin * 100000000).toFixed(0)} sat
-          </Badge>
+          <div className="flex flex-col items-center ">
+            <Badge variant="gold" className="text-xs px-2 py-1 my-3">
+              <FaBitcoin className="mr-1 text-xs" />
+              {(totalBitcoin * 100000000).toFixed(0)} sats au total
+            </Badge>
+            {totalReceived > 0 && (
+              <p className="text-xs text-muted-foreground text-center">
+                dont {(totalReceived * 100000000).toFixed(0)}{" "}
+                <FaBitcoin className="inline mr-1 text-xs" />
+                sats reçus gratos
+              </p>
+            )}
+          </div>
         </CardContent>
       </Card>
       <Card className="h-full flex flex-col">

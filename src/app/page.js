@@ -28,6 +28,7 @@ export default function Home() {
   const [bitcoinPrice, setBitcoinPrice] = useState(null);
   const [totalInvested, setTotalInvested] = useState(0);
   const [totalBitcoin, setTotalBitcoin] = useState(0);
+  const [totalReceived, setTotalReceived] = useState(0);
   const [currentValue, setCurrentValue] = useState(0);
   useEffect(() => {
     fetchTransactions();
@@ -43,9 +44,9 @@ export default function Home() {
         .filter((t) => t.type === "buy" && parseFloat(t.fiat_amount) > 0)
         .reduce((sum, t) => sum + parseFloat(t.fiat_amount), 0);
       
-      // Total des bitcoins achetés (pour la carte "Investi Total")
-      const totalBitcoinBought = transactions
-        .filter((t) => t.type === "buy")
+      // Total des bitcoins reçus gratuitement
+      const totalReceivedAmount = transactions
+        .filter((t) => t.type === "received")
         .reduce((sum, t) => sum + parseFloat(t.crypto_amount), 0);
       
       // Total des satoshis possédés (achats + reçus - ventes) pour "Valeur Actuelle"
@@ -59,11 +60,12 @@ export default function Home() {
         return sum; // pour les autres types comme "exchange"
       }, 0);
       
-      console.log("Bitcoin achetés:", totalBitcoinBought);
+      console.log("Bitcoin reçus gratuitement:", totalReceivedAmount);
       console.log("Bitcoin balance total:", totalBitcoinBalance);
       
       setTotalInvested(totalInvestedAmount);
       setTotalBitcoin(totalBitcoinBalance); // Total complet pour les satoshis
+      setTotalReceived(totalReceivedAmount);
       if (bitcoinPrice) {
         setCurrentValue(totalBitcoinBalance * bitcoinPrice);
       }
@@ -177,6 +179,7 @@ export default function Home() {
               bitcoinPrice={bitcoinPrice}
               totalInvested={totalInvested}
               totalBitcoin={totalBitcoin}
+              totalReceived={totalReceived}
               currentValue={currentValue}
             />
             

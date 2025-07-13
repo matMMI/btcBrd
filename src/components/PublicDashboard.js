@@ -10,6 +10,7 @@ export default function PublicDashboard({ onAdminLogin }) {
   const [bitcoinPrice, setBitcoinPrice] = useState(null);
   const [totalInvested, setTotalInvested] = useState(0);
   const [totalBitcoin, setTotalBitcoin] = useState(0);
+  const [totalReceived, setTotalReceived] = useState(0);
   const [currentValue, setCurrentValue] = useState(0);
   useEffect(() => {
     fetchTransactions();
@@ -24,6 +25,11 @@ export default function PublicDashboard({ onAdminLogin }) {
         .filter((t) => t.type === "buy" && parseFloat(t.fiat_amount) > 0)
         .reduce((sum, t) => sum + parseFloat(t.fiat_amount), 0);
       
+      // Total des bitcoins reçus gratuitement
+      const totalReceivedAmount = transactions
+        .filter((t) => t.type === "received")
+        .reduce((sum, t) => sum + parseFloat(t.crypto_amount), 0);
+      
       // Total des satoshis possédés (achats + reçus - ventes) 
       const totalBitcoinBalance = transactions.reduce((sum, t) => {
         const amount = parseFloat(t.crypto_amount);
@@ -37,6 +43,7 @@ export default function PublicDashboard({ onAdminLogin }) {
       
       setTotalInvested(totalInvestedAmount);
       setTotalBitcoin(totalBitcoinBalance);
+      setTotalReceived(totalReceivedAmount);
       if (bitcoinPrice) {
         setCurrentValue(totalBitcoinBalance * bitcoinPrice);
       }
@@ -79,6 +86,7 @@ export default function PublicDashboard({ onAdminLogin }) {
           bitcoinPrice={bitcoinPrice}
           totalInvested={totalInvested}
           totalBitcoin={totalBitcoin}
+          totalReceived={totalReceived}
           currentValue={currentValue}
         />
         <TransactionList transactions={transactions} showActions={false} />

@@ -11,7 +11,7 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
     type: "buy",
     crypto_symbol: "BTC",
     crypto_amount: "",
-    price_per_unit: "",
+    fiat_amount: "",
     exchange_platform: "",
     notes: "",
   });
@@ -23,7 +23,7 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
         type: transaction.type,
         crypto_symbol: transaction.crypto_symbol,
         crypto_amount: transaction.crypto_amount.toString(),
-        price_per_unit: transaction.fiat_amount ? transaction.fiat_amount.toString() : "",
+        fiat_amount: transaction.fiat_amount ? transaction.fiat_amount.toString() : "",
         exchange_platform: transaction.exchange_platform || "",
         notes: transaction.notes || "",
       });
@@ -41,17 +41,14 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const fiat_amount =
-      parseFloat(formData.crypto_amount) *
-      parseFloat(formData.price_per_unit);
+    const finalFiatAmount = parseFloat(formData.fiat_amount);
 
     const { error } = await supabase
       .from("crypto_transactions")
       .update({
         ...formData,
         crypto_amount: parseFloat(formData.crypto_amount),
-        price_per_unit: parseFloat(formData.price_per_unit),
-        fiat_amount,
+        fiat_amount: finalFiatAmount,
         fiat_currency: "EUR",
       })
       .eq("id", transaction.id);
@@ -142,8 +139,8 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
               </label>
               <input
                 type="number"
-                name="price_per_unit"
-                value={formData.price_per_unit}
+                name="fiat_amount"
+                value={formData.fiat_amount}
                 onChange={handleChange}
                 placeholder="0.00"
                 step="0.01"

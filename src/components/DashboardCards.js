@@ -29,10 +29,9 @@ export default function DashboardCards({
       <Card className="h-full flex flex-col">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Investi Total</CardTitle>
-          <Badge variant="secondary">€</Badge>
         </CardHeader>
         <CardContent className="flex flex-col justify-center items-center flex-1 space-y-4">
-          <div className="text-2xl font-bold text-primary text-center">
+          <div className="text-2xl font-regular  text-primary text-center">
             {totalInvested.toLocaleString("fr-FR")} €
           </div>
           <Badge variant="gold" className="text-xs px-2 py-1">
@@ -62,7 +61,7 @@ export default function DashboardCards({
           </Badge>
         </CardHeader>
         <CardContent className="flex flex-col justify-center items-center flex-1 space-y-4">
-          <div className="text-2xl font-bold text-center">
+          <div className="text-2xl font-regular text-center">
             {currentValue.toLocaleString("fr-FR")} €
           </div>
           <Badge
@@ -83,7 +82,7 @@ export default function DashboardCards({
           <Badge variant="outline">Impôt</Badge>
         </CardHeader>
         <CardContent className="flex flex-col justify-center items-center flex-1 space-y-4">
-          <div className="text-2xl font-bold text-orange-500 text-center">
+          <div className="text-2xl font-regular  text-orange-500 text-center">
             {currentValue > totalInvested
               ? `${((currentValue - totalInvested) * 0.3).toLocaleString(
                   "fr-FR"

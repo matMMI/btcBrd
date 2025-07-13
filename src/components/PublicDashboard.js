@@ -14,7 +14,7 @@ export default function PublicDashboard({ onAdminLogin }) {
   useEffect(() => {
     fetchTransactions();
     fetchBitcoinPrice();
-    const interval = setInterval(fetchBitcoinPrice, 30000);
+    const interval = setInterval(fetchBitcoinPrice, 20000);
     return () => clearInterval(interval);
   }, []);
   useEffect(() => {
@@ -46,11 +46,11 @@ export default function PublicDashboard({ onAdminLogin }) {
   }
   async function fetchBitcoinPrice() {
     try {
-      const response = await fetch(
-        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur"
-      );
+      const response = await fetch("/api/bitcoin-price");
       const data = await response.json();
-      setBitcoinPrice(data.bitcoin.eur);
+      if (data.bitcoin) {
+        setBitcoinPrice(data.bitcoin.eur);
+      }
     } catch (error) {
       console.error("Erreur lors de la récupération du prix Bitcoin:", error);
     }

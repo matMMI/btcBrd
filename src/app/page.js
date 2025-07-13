@@ -33,7 +33,7 @@ export default function Home() {
     fetchTransactions();
     fetchForeignAccounts();
     fetchBitcoinPrice();
-    const interval = setInterval(fetchBitcoinPrice, 30000);
+    const interval = setInterval(fetchBitcoinPrice, 20000);
     return () => clearInterval(interval);
   }, []);
   useEffect(() => {
@@ -80,11 +80,18 @@ export default function Home() {
   }
   async function fetchBitcoinPrice() {
     try {
-      const response = await fetch(
-        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur"
-      );
+      const response = await fetch("/api/bitcoin-price", {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      });
       const data = await response.json();
-      setBitcoinPrice(data.bitcoin.eur);
+      console.log("Prix Bitcoin reçu:", data);
+      if (data.bitcoin) {
+        console.log("Mise à jour du prix Bitcoin:", data.bitcoin.eur);
+        setBitcoinPrice(data.bitcoin.eur);
+      }
     } catch (error) {
       console.error("Erreur lors de la récupération du prix Bitcoin:", error);
     }

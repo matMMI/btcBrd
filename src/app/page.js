@@ -132,37 +132,39 @@ export default function Home() {
     );
   }
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="mb-8">
-        <div className="flex justify-end items-center mb-4">
+    <div className="max-w-7xl mx-auto">
+      <div className="mb-10">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-light tracking-tight">Crypto Tax Tracker</h1>
           <Button
-            variant="outline"
+            variant="ghost"
+            size="sm"
             onClick={handleLogout}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 font-light"
           >
-            <FaSignOutAlt />
+            <FaSignOutAlt className="text-sm" />
             Déconnexion
           </Button>
         </div>
-        <div className="border-b border-border mb-6">
+        <div className="border-b border-border/50 mb-8">
           <nav className="-mb-px flex space-x-8">
             <button
               onClick={() => setActiveTab("dashboard")}
-              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+              className={`py-3 px-1 border-b-2 font-light text-sm transition-colors ${
                 activeTab === "dashboard"
-                  ? "border-primary text-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+                  ? "border-primary text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground hover:border-border/50"
               }`}
             >
-              <FaBitcoin className="inline mr-2" />
+              <FaBitcoin className="inline mr-2 text-xs" />
               Dashboard & Transactions
             </button>
             <button
               onClick={() => setActiveTab("accounts")}
-              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+              className={`py-3 px-1 border-b-2 font-light text-sm transition-colors ${
                 activeTab === "accounts"
-                  ? "border-primary text-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+                  ? "border-primary text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground hover:border-border/50"
               }`}
             >
               Comptes à l&apos;étranger
@@ -182,9 +184,9 @@ export default function Home() {
             <div className="flex justify-between items-center mb-6">
               <Button
                 onClick={() => setShowTransactionModal(true)}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 font-light"
               >
-                <FaPlus /> Ajouter une transaction
+                <FaPlus className="text-sm" /> Ajouter une transaction
               </Button>
             </div>
             <TransactionList
@@ -203,9 +205,9 @@ export default function Home() {
             <div className="flex justify-between items-center mb-6">
               <Button
                 onClick={() => setShowAccountForm(true)}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 font-light"
               >
-                <FaPlus /> Ajouter un compte à l&apos;étranger
+                <FaPlus className="text-sm" /> Ajouter un compte à l&apos;étranger
               </Button>
             </div>
             {showAccountForm && (
@@ -219,38 +221,37 @@ export default function Home() {
                 />
               </div>
             )}
-            <Card>
+            <Card className="border-border shadow-sm">
               <CardHeader>
-                <CardTitle>Comptes crypto à l&apos;étranger</CardTitle>
+                <CardTitle className="text-xl font-light">Comptes crypto à l&apos;étranger</CardTitle>
               </CardHeader>
               <CardContent>
                 {foreignAccounts.length === 0 ? (
-                  <p className="text-muted-foreground">
+                  <p className="text-sm font-light text-muted-foreground">
                     Aucun compte enregistré
                   </p>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {foreignAccounts.map((account) => (
                       <div
                         key={account.id}
-                        className="border border-border rounded-lg p-4"
+                        className="border border-border rounded-lg p-4 hover:border-border/80 transition-colors"
                       >
                         <div className="flex justify-between items-start">
-                          <div>
-                            <h4 className="font-medium">
+                          <div className="space-y-1">
+                            <h4 className="font-normal">
                               {account.platform_name}
                             </h4>
-                            <p className="text-sm text-muted-foreground">
+                            <p className="text-sm font-light text-muted-foreground">
                               {account.platform_country}
                             </p>
-                            <p className="text-sm text-muted-foreground">
+                            <p className="text-xs font-light text-muted-foreground">
                               {account.account_type}
                             </p>
                           </div>
                           <Badge
-                            variant={
-                              account.is_active ? "secondary" : "destructive"
-                            }
+                            variant={account.is_active ? "secondary" : "destructive"}
+                            className="font-light"
                           >
                             {account.is_active ? "Actif" : "Inactif"}
                           </Badge>

@@ -70,15 +70,17 @@ export default function PublicDashboard({ onAdminLogin }) {
     }
   }
   return (
-    <div className="max-w-6xl mx-auto p-4">
-      <div className="mb-8">
-        <div className="flex justify-end items-center mb-6">
+    <div className="max-w-7xl mx-auto">
+      <div className="mb-10">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-light tracking-tight">Crypto Tax Tracker</h1>
           <Button
-            variant="outline"
+            variant="ghost"
+            size="sm"
             onClick={onAdminLogin}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 font-light"
           >
-            <FaShieldAlt />
+            <FaShieldAlt className="text-sm" />
             Administration
           </Button>
         </div>
@@ -89,7 +91,7 @@ export default function PublicDashboard({ onAdminLogin }) {
           totalReceived={totalReceived}
           currentValue={currentValue}
         />
-        <TransactionList transactions={transactions} showActions={false} />
+        <TransactionList transactions={transactions} onUpdate={fetchTransactions} showActions={false} />
       </div>
     </div>
   );

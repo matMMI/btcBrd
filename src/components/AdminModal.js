@@ -40,11 +40,11 @@ export default function AdminModal({ isOpen, onClose, onLogin }) {
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-center">Administration</DialogTitle>
+          <DialogTitle className="text-xl font-light text-center">Administration</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="password" className="text-sm font-medium">
+            <label htmlFor="password" className="text-sm font-light text-muted-foreground">
               Mot de passe
             </label>
             <div className="relative">
@@ -55,23 +55,23 @@ export default function AdminModal({ isOpen, onClose, onLogin }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Entrez votre mot de passe"
-                className="pl-10"
+                className="pl-10 font-light"
                 required
                 autoFocus
               />
             </div>
-            {error && <p className="text-sm text-destructive">{error}</p>}
+            {error && <p className="text-sm font-light text-destructive">{error}</p>}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <Button
               type="button"
               variant="outline"
               onClick={handleClose}
-              className="flex-1"
+              className="flex-1 font-light"
             >
               Annuler
             </Button>
-            <Button type="submit" className="flex-1" disabled={loading}>
+            <Button type="submit" className="flex-1 font-light" disabled={loading}>
               {loading ? "Connexion..." : "Se connecter"}
             </Button>
           </div>

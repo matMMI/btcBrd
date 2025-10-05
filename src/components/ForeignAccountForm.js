@@ -38,18 +38,18 @@ export default function ForeignAccountForm({ onSubmit, onCancel }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-dark-card p-6 rounded-lg border border-dark-border">
-      <h3 className="text-xl font-semibold mb-4 text-dark-text">
+    <form onSubmit={handleSubmit} className="bg-card p-6 rounded-lg border border-border shadow-sm">
+      <h3 className="text-xl font-light mb-2">
         Nouveau compte à l&apos;étranger
       </h3>
-      <p className="text-sm text-dark-muted mb-4">
+      <p className="text-sm font-light text-muted-foreground mb-6">
         Pour le formulaire 3916-BIS (déclaration des comptes crypto à
         l&apos;étranger)
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-dark-text mb-1">
+          <label className="block text-sm font-light text-muted-foreground mb-2">
             Nom de la plateforme
           </label>
           <input
@@ -59,12 +59,12 @@ export default function ForeignAccountForm({ onSubmit, onCancel }) {
             onChange={handleChange}
             placeholder="Ex: Binance, Kraken, Coinbase..."
             required
-            className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text placeholder-dark-muted"
+            className="w-full px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary font-light placeholder:text-muted-foreground/50 transition-colors"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-dark-text mb-1">
+          <label className="block text-sm font-light text-muted-foreground mb-2">
             Pays de la plateforme
           </label>
           <input
@@ -74,12 +74,12 @@ export default function ForeignAccountForm({ onSubmit, onCancel }) {
             onChange={handleChange}
             placeholder="Ex: Malte, États-Unis, Suisse..."
             required
-            className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text placeholder-dark-muted"
+            className="w-full px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary font-light placeholder:text-muted-foreground/50 transition-colors"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-dark-text mb-1">
+          <label className="block text-sm font-light text-muted-foreground mb-2">
             Type de compte
           </label>
           <input
@@ -88,35 +88,35 @@ export default function ForeignAccountForm({ onSubmit, onCancel }) {
             value={account.account_type}
             onChange={handleChange}
             placeholder="Ex: Exchange, Wallet..."
-            className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text placeholder-dark-muted"
+            className="w-full px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary font-light placeholder:text-muted-foreground/50 transition-colors"
           />
         </div>
 
-        <div className="flex items-center">
+        <div className="flex items-center pt-6">
           <label className="flex items-center">
             <input
               type="checkbox"
               name="is_active"
               checked={account.is_active}
               onChange={handleChange}
-              className="rounded border-gray-300 text-primary focus:ring-primary"
+              className="rounded border-border text-primary focus:ring-primary focus:ring-1"
             />
-            <span className="ml-2 text-sm text-dark-text">Compte actif</span>
+            <span className="ml-2 text-sm font-light">Compte actif</span>
           </label>
         </div>
       </div>
 
-      <div className="mt-6 flex gap-4">
+      <div className="mt-6 flex gap-3">
         <button
           type="submit"
-          className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          className="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 font-light transition-colors"
         >
           Enregistrer
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="bg-dark-border text-dark-text px-4 py-2 rounded-md hover:bg-dark-muted hover:bg-opacity-20"
+          className="bg-secondary text-secondary-foreground px-4 py-2 rounded-md hover:bg-secondary/80 font-light transition-colors"
         >
           Annuler
         </button>

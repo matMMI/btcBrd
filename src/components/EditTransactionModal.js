@@ -67,12 +67,12 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Modifier la Transaction</DialogTitle>
+          <DialogTitle className="text-xl font-light">Modifier la Transaction</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-dark-text mb-1">
+              <label className="block text-sm font-light text-muted-foreground mb-2">
                 Date
               </label>
               <input
@@ -81,12 +81,12 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
                 value={formData.date}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text"
+                className="w-full px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary font-light transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark-text mb-1">
+              <label className="block text-sm font-light text-muted-foreground mb-2">
                 Type
               </label>
               <select
@@ -94,7 +94,7 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
                 value={formData.type}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text"
+                className="w-full px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary font-light transition-colors"
               >
                 <option value="buy">Achat</option>
                 <option value="sell">Vente</option>
@@ -104,7 +104,7 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark-text mb-1">
+              <label className="block text-sm font-light text-muted-foreground mb-2">
                 Crypto
               </label>
               <input
@@ -114,12 +114,12 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
                 onChange={handleChange}
                 placeholder="BTC, ETH, etc."
                 required
-                className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text placeholder-dark-muted"
+                className="w-full px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary font-light placeholder:text-muted-foreground/50 transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark-text mb-1">
+              <label className="block text-sm font-light text-muted-foreground mb-2">
                 Quantité
               </label>
               <input
@@ -130,13 +130,13 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
                 placeholder="0.00000000"
                 step="0.00000001"
                 required
-                className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text placeholder-dark-muted"
+                className="w-full px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary font-light placeholder:text-muted-foreground/50 transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark-text mb-1">
-                Prix (EUR)
+              <label className="block text-sm font-light text-muted-foreground mb-2">
+                Montant total (EUR)
               </label>
               <input
                 type="number"
@@ -146,12 +146,12 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
                 placeholder="0.00"
                 step="0.01"
                 required
-                className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text placeholder-dark-muted"
+                className="w-full px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary font-light placeholder:text-muted-foreground/50 transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark-text mb-1">
+              <label className="block text-sm font-light text-muted-foreground mb-2">
                 Plateforme d&apos;échange
               </label>
               <input
@@ -160,13 +160,13 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
                 value={formData.exchange_platform}
                 onChange={handleChange}
                 placeholder="Binance, Coinbase, etc."
-                className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text placeholder-dark-muted"
+                className="w-full px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary font-light placeholder:text-muted-foreground/50 transition-colors"
               />
             </div>
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-dark-text mb-1">
+            <label className="block text-sm font-light text-muted-foreground mb-2">
               Notes
             </label>
             <textarea
@@ -174,21 +174,21 @@ export default function EditTransactionModal({ isOpen, onClose, onSubmit, transa
               value={formData.notes}
               onChange={handleChange}
               rows="3"
-              className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-dark-text placeholder-dark-muted"
+              className="w-full px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary font-light placeholder:text-muted-foreground/50 transition-colors resize-none"
             />
           </div>
 
-          <div className="mt-6 flex gap-4">
+          <div className="mt-6 flex gap-3">
             <button
               type="submit"
-              className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600"
+              className="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 font-light transition-colors"
             >
               Modifier
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="bg-dark-border text-dark-text px-4 py-2 rounded-md hover:bg-dark-muted hover:bg-opacity-20"
+              className="bg-secondary text-secondary-foreground px-4 py-2 rounded-md hover:bg-secondary/80 font-light transition-colors"
             >
               Annuler
             </button>

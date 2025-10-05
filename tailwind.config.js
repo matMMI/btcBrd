@@ -1,4 +1,3 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -43,15 +42,6 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Couleurs custom conservées
-        danger: "#EF4444",
-        dark: {
-          bg: "#0f172a",
-          card: "#1e293b",
-          border: "#334155",
-          text: "#f1f5f9",
-          muted: "#94a3b8"
-        }
       },
       borderRadius: {
         lg: "var(--radius)",

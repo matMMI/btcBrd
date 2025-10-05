@@ -123,7 +123,7 @@ export default function DashboardCards({
               inputMode="decimal"
               value={multiplier}
               onChange={(e) => {
-                const val = e.target.value.replace(/[^0-9.]/g, "");
+                const val = e.target.value.replace(/,/g, '.').replace(/[^0-9.]/g, "");
                 setMultiplier(parseFloat(val) || 0);
               }}
               placeholder="10"

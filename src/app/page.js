@@ -43,12 +43,12 @@ export default function Home() {
       const totalInvestedAmount = transactions
         .filter((t) => t.type === "buy" && parseFloat(t.fiat_amount) > 0)
         .reduce((sum, t) => sum + parseFloat(t.fiat_amount), 0);
-      
+
       // Total des bitcoins reçus gratuitement
       const totalReceivedAmount = transactions
         .filter((t) => t.type === "received")
         .reduce((sum, t) => sum + parseFloat(t.crypto_amount), 0);
-      
+
       // Total des satoshis possédés (achats + reçus - ventes) pour "Valeur Actuelle"
       const totalBitcoinBalance = transactions.reduce((sum, t) => {
         const amount = parseFloat(t.crypto_amount);
@@ -59,8 +59,7 @@ export default function Home() {
         }
         return sum; // pour les autres types comme "exchange"
       }, 0);
-      
-      
+
       setTotalInvested(totalInvestedAmount);
       setTotalBitcoin(totalBitcoinBalance); // Total complet pour les satoshis
       setTotalReceived(totalReceivedAmount);
@@ -96,10 +95,10 @@ export default function Home() {
   async function fetchBitcoinPrice() {
     try {
       const response = await fetch("/api/bitcoin-price", {
-        cache: 'no-store',
+        cache: "no-store",
         headers: {
-          'Cache-Control': 'no-cache'
-        }
+          "Cache-Control": "no-cache",
+        },
       });
       const data = await response.json();
       if (data.bitcoin) {
@@ -135,7 +134,7 @@ export default function Home() {
     <div className="max-w-7xl mx-auto">
       <div className="mb-10">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-light tracking-tight">Crypto Tax Tracker</h1>
+          <h1 className="text-3xl font-light tracking-tight">cryptotracker</h1>
           <Button
             variant="ghost"
             size="sm"
@@ -180,7 +179,7 @@ export default function Home() {
               totalReceived={totalReceived}
               currentValue={currentValue}
             />
-            
+
             <div className="flex justify-between items-center mb-6">
               <Button
                 onClick={() => setShowTransactionModal(true)}
@@ -207,7 +206,8 @@ export default function Home() {
                 onClick={() => setShowAccountForm(true)}
                 className="flex items-center gap-2 font-light"
               >
-                <FaPlus className="text-sm" /> Ajouter un compte à l&apos;étranger
+                <FaPlus className="text-sm" /> Ajouter un compte à
+                l&apos;étranger
               </Button>
             </div>
             {showAccountForm && (
@@ -223,7 +223,9 @@ export default function Home() {
             )}
             <Card className="border-border shadow-sm">
               <CardHeader>
-                <CardTitle className="text-xl font-light">Comptes crypto à l&apos;étranger</CardTitle>
+                <CardTitle className="text-xl font-light">
+                  Comptes crypto à l&apos;étranger
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 {foreignAccounts.length === 0 ? (
@@ -250,7 +252,9 @@ export default function Home() {
                             </p>
                           </div>
                           <Badge
-                            variant={account.is_active ? "secondary" : "destructive"}
+                            variant={
+                              account.is_active ? "secondary" : "destructive"
+                            }
                             className="font-light"
                           >
                             {account.is_active ? "Actif" : "Inactif"}

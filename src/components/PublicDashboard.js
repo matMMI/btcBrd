@@ -24,13 +24,13 @@ export default function PublicDashboard({ onAdminLogin }) {
       const totalInvestedAmount = transactions
         .filter((t) => t.type === "buy" && parseFloat(t.fiat_amount) > 0)
         .reduce((sum, t) => sum + parseFloat(t.fiat_amount), 0);
-      
+
       // Total des bitcoins reçus gratuitement
       const totalReceivedAmount = transactions
         .filter((t) => t.type === "received")
         .reduce((sum, t) => sum + parseFloat(t.crypto_amount), 0);
-      
-      // Total des satoshis possédés (achats + reçus - ventes) 
+
+      // Total des satoshis possédés (achats + reçus - ventes)
       const totalBitcoinBalance = transactions.reduce((sum, t) => {
         const amount = parseFloat(t.crypto_amount);
         if (t.type === "buy" || t.type === "received") {
@@ -40,7 +40,7 @@ export default function PublicDashboard({ onAdminLogin }) {
         }
         return sum; // pour les autres types comme "exchange"
       }, 0);
-      
+
       setTotalInvested(totalInvestedAmount);
       setTotalBitcoin(totalBitcoinBalance);
       setTotalReceived(totalReceivedAmount);
@@ -73,7 +73,7 @@ export default function PublicDashboard({ onAdminLogin }) {
     <div className="max-w-7xl mx-auto">
       <div className="mb-10">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-light tracking-tight">Crypto Tax Tracker</h1>
+          <h1 className="text-3xl font-light tracking-tight">cryptotracker</h1>
           <Button
             variant="ghost"
             size="sm"
@@ -91,7 +91,11 @@ export default function PublicDashboard({ onAdminLogin }) {
           totalReceived={totalReceived}
           currentValue={currentValue}
         />
-        <TransactionList transactions={transactions} onUpdate={fetchTransactions} showActions={false} />
+        <TransactionList
+          transactions={transactions}
+          onUpdate={fetchTransactions}
+          showActions={false}
+        />
       </div>
     </div>
   );

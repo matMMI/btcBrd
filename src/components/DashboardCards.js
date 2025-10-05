@@ -15,6 +15,8 @@ export default function DashboardCards({
   const multiplier = parseFloat(multiplierInput.replace(/,/g, '.')) || 0;
   const predictedBtcPrice = bitcoinPrice * multiplier;
   const predictedValue = totalBitcoin * predictedBtcPrice;
+  const predictedGain = predictedValue - totalInvested;
+  const predictedNetGain = predictedGain > 0 ? predictedGain * 0.7 : 0;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
@@ -142,6 +144,9 @@ export default function DashboardCards({
           </div>
           <div className="text-3xl font-light tracking-tight text-purple-500">
             {predictedValue.toLocaleString("fr-FR")} €
+          </div>
+          <div className="text-sm font-light text-green-500">
+            Net: {predictedNetGain.toLocaleString("fr-FR")} €
           </div>
         </CardContent>
       </Card>

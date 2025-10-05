@@ -9,6 +9,7 @@
 # testing
 /coverage
 
+CLAUDE.md
 .env.local
 # next.js
 /.next/

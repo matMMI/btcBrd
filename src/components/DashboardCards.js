@@ -11,7 +11,8 @@ export default function DashboardCards({
   totalReceived,
   currentValue,
 }) {
-  const [multiplier, setMultiplier] = useState(10);
+  const [multiplierInput, setMultiplierInput] = useState("10");
+  const multiplier = parseFloat(multiplierInput.replace(/,/g, '.')) || 0;
   const predictedBtcPrice = bitcoinPrice * multiplier;
   const predictedValue = totalBitcoin * predictedBtcPrice;
 
@@ -121,10 +122,10 @@ export default function DashboardCards({
             <input
               type="text"
               inputMode="decimal"
-              value={multiplier}
+              value={multiplierInput}
               onChange={(e) => {
-                const val = e.target.value.replace(/,/g, '.').replace(/[^0-9.]/g, "");
-                setMultiplier(parseFloat(val) || 0);
+                const val = e.target.value.replace(/[^0-9.,]/g, "");
+                setMultiplierInput(val);
               }}
               placeholder="10"
               className="w-20 px-2 py-1 bg-background border border-border rounded-md text-sm font-light focus:outline-none focus:ring-1 focus:ring-primary text-center"

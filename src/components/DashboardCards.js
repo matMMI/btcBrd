@@ -4,7 +4,6 @@ import { TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { useState } from "react";
-
 export default function DashboardCards({
   bitcoinPrice,
   totalInvested,
@@ -124,17 +123,21 @@ export default function DashboardCards({
               inputMode="decimal"
               value={multiplier}
               onChange={(e) => {
-                const val = e.target.value.replace(/[^0-9.]/g, '');
+                const val = e.target.value.replace(/[^0-9.]/g, "");
                 setMultiplier(parseFloat(val) || 0);
               }}
               placeholder="10"
               className="w-20 px-2 py-1 bg-background border border-border rounded-md text-sm font-light focus:outline-none focus:ring-1 focus:ring-primary text-center"
             />
-            <span className="text-xs font-light text-muted-foreground">× BTC actuel</span>
+            <span className="text-xs font-light text-muted-foreground">
+              × BTC actuel
+            </span>
           </div>
           <div className="text-xs font-light text-muted-foreground">
-            <FaBitcoin className="inline text-orange-500 mr-1" />
-            1 BTC = <span className="text-purple-400">{predictedBtcPrice.toLocaleString("fr-FR")} €</span>
+            <FaBitcoin className="inline text-orange-500 mr-1" />1 BTC ={" "}
+            <span className="text-purple-400">
+              {predictedBtcPrice.toLocaleString("fr-FR")} €
+            </span>
           </div>
           <div className="text-3xl font-light tracking-tight text-purple-500">
             {predictedValue.toLocaleString("fr-FR")} €

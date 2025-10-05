@@ -16,7 +16,6 @@ export async function GET() {
     }
     
     const data = await response.json();
-    console.log('Bitcoin price fetched:', data);
     
     return Response.json(data, {
       headers: {

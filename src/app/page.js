@@ -60,8 +60,6 @@ export default function Home() {
         return sum; // pour les autres types comme "exchange"
       }, 0);
       
-      console.log("Bitcoin reçus gratuitement:", totalReceivedAmount);
-      console.log("Bitcoin balance total:", totalBitcoinBalance);
       
       setTotalInvested(totalInvestedAmount);
       setTotalBitcoin(totalBitcoinBalance); // Total complet pour les satoshis
@@ -104,9 +102,7 @@ export default function Home() {
         }
       });
       const data = await response.json();
-      console.log("Prix Bitcoin reçu:", data);
       if (data.bitcoin) {
-        console.log("Mise à jour du prix Bitcoin:", data.bitcoin.eur);
         setBitcoinPrice(data.bitcoin.eur);
       }
     } catch (error) {

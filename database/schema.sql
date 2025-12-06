@@ -14,7 +14,7 @@ create table crypto_transactions (
   created_at timestamp with time zone default timezone('utc'::text, now())
 );
 
--- Créer la table des comptes crypto à l'étranger (pour formulaire 3916-BIS)
+
 create table foreign_crypto_accounts (
   id uuid default gen_random_uuid() primary key,
   platform_name varchar(100) not null,
